@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d9cfbdec-0cb0-4005-9038-02497dacd144" name="Default Changelist" comment="" />
+    <list default="true" id="d9cfbdec-0cb0-4005-9038-02497dacd144" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/003.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/003.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/003$hw003.coverage" NAME="hw003 Coverage Results" MODIFIED="1555377430027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -22,13 +30,28 @@
     <expand />
     <select />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1889982918">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hw003.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="-1805">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+=======
             <state relative-caret-position="143">
               <caret line="18" column="20" lean-forward="true" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
+>>>>>>> 93a454f618e50346305116e8432b5235e633c058
             </state>
           </provider>
         </entry>
@@ -48,13 +71,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hw003_knn.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="1577">
+              <caret line="83" column="45" selection-start-line="83" selection-start-column="45" selection-end-line="83" selection-end-column="45" />
+=======
             <state relative-caret-position="192">
               <caret line="76" column="25" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
+>>>>>>> 93a454f618e50346305116e8432b5235e633c058
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+=======
         <entry file="file://$USER_HOME$/anaconda3/envs/ML/lib/python3.7/site-packages/sklearn/neighbors/kde.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-557">
@@ -64,6 +94,7 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+>>>>>>> 93a454f618e50346305116e8432b5235e633c058
         <entry file="file://$PROJECT_DIR$/compare_X_train.png">
           <provider selected="true" editor-type-id="images" />
         </entry>
@@ -72,7 +103,11 @@
         <entry file="file://$PROJECT_DIR$/doc.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
+<<<<<<< HEAD
               <first_editor relative-caret-position="765">
+=======
+              <first_editor relative-caret-position="1634">
+>>>>>>> 85e82410f9d94fb6bdfe01a5722c66935bddd56b
                 <caret line="86" selection-start-line="86" selection-end-line="86" />
               </first_editor>
               <second_editor />
@@ -93,7 +128,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/HWData3.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
+            <state relative-caret-position="456">
               <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
             </state>
           </provider>
@@ -109,7 +144,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -122,6 +157,12 @@
       </list>
     </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
   <component name="ProjectConfigurationFiles">
     <option name="files">
       <list>
@@ -129,11 +170,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
-    <option name="y" value="23" />
-    <option name="width" value="2495" />
-    <option name="height" value="1417" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="64" />
+    <option name="y" value="22" />
+    <option name="width" value="1946" />
+    <option name="height" value="1106" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -148,7 +189,8 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="full.screen.before.presentation.mode" value="true" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -167,7 +209,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.hw003_knn">
+  <component name="RunManager" selected="Python.hw003">
     <configuration name="hw003" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="003" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -234,10 +276,15 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.hw003" />
+      <item itemvalue="Python.hw003_knn" />
+      <item itemvalue="Python.test_Kfloder" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.hw003_knn" />
         <item itemvalue="Python.hw003" />
+        <item itemvalue="Python.hw003_knn" />
         <item itemvalue="Python.test_Kfloder" />
       </list>
     </recent_temporary>
@@ -270,15 +317,39 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
+    <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14874697" />
+=======
     <frame x="65" y="23" width="2495" height="1417" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1475744" />
+>>>>>>> 93a454f618e50346305116e8432b5235e633c058
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Run" order="2" weight="0.34716982" />
+=======
+<<<<<<< HEAD
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34676006" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3864151" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32924694" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32924694" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.35901925" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32830188" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+=======
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34716982" />
+>>>>>>> 85e82410f9d94fb6bdfe01a5722c66935bddd56b
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3864151" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -289,6 +360,7 @@
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32830188" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
+>>>>>>> 93a454f618e50346305116e8432b5235e633c058
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -319,6 +391,9 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -340,27 +415,29 @@
     <SUITE FILE_PATH="coverage/003$hw003.coverage" NAME="hw003 Coverage Results" MODIFIED="1555383437215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.3/python_stubs/1965831862/numpy/core/_multiarray_umath.py">
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.3/python_stubs/1965831862/numpy/core/_multiarray_umath.py" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/ML/lib/python3.7/site-packages/sklearn/model_selection/_split.py" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/ML/lib/python3.7/codecs.py" />
+    <entry file="file://$PROJECT_DIR$/test_Kfloder.py" />
+    <entry file="file://$PROJECT_DIR$/../001/ML/KNN.py" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/ML/lib/python3.7/site-packages/scipy/spatial/distance.py" />
+    <entry file="file://$PROJECT_DIR$/../001/ML/机器学习实验1 — KNN分类器.md" />
+    <entry file="file://$PROJECT_DIR$/kernal.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hw003_knn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="9720" column="8" selection-start-line="9720" selection-start-column="8" selection-end-line="9720" selection-end-column="8" />
+        <state relative-caret-position="1577">
+          <caret line="83" column="45" selection-start-line="83" selection-start-column="45" selection-end-line="83" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/ML/lib/python3.7/site-packages/sklearn/model_selection/_split.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="811">
-          <caret line="1215" column="8" selection-start-line="1215" selection-start-column="8" selection-end-line="1215" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/ML/lib/python3.7/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="811">
-          <caret line="332" selection-start-line="332" selection-end-line="332" />
-        </state>
-      </provider>
-    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/doc.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="1634">
+=======
     <entry file="file://$PROJECT_DIR$/test_Kfloder.py" />
     <entry file="file://$PROJECT_DIR$/../001/ML/KNN.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -386,15 +463,43 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/doc.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="1548">
+>>>>>>> 93a454f618e50346305116e8432b5235e633c058
+            <caret line="86" selection-start-line="86" selection-end-line="86" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 85e82410f9d94fb6bdfe01a5722c66935bddd56b
     <entry file="file://$PROJECT_DIR$/HWData3.csv">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="456">
+=======
         <state relative-caret-position="432">
+>>>>>>> 93a454f618e50346305116e8432b5235e633c058
           <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/compare_X_train.png">
       <provider selected="true" editor-type-id="images" />
+<<<<<<< HEAD
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hw003.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1805">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+=======
     </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/ML/lib/python3.7/site-packages/sklearn/neighbors/kde.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -427,6 +532,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/doc.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -445,6 +551,9 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 93a454f618e50346305116e8432b5235e633c058
+>>>>>>> 85e82410f9d94fb6bdfe01a5722c66935bddd56b
   </component>
   <component name="masterDetails">
     <states>
