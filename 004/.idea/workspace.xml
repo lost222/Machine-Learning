@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5273d116-63e5-4b6f-bbee-c69a0b9d0540" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../003/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../003/.idea/003.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../003/.idea/003.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../003/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../003/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../003/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../003/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../003/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../003/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -145,18 +149,17 @@
       <option name="presentableId" value="Default" />
       <updated>1555418416181</updated>
       <workItem from="1555418421572" duration="1855000" />
-      <workItem from="1555470308020" duration="381000" />
+      <workItem from="1555470308020" duration="592000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2236000" />
+    <option name="totallyTimeSpent" value="2447000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="69" y="23" width="2491" height="1417" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25193956" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25193956" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -170,7 +173,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32981133" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
