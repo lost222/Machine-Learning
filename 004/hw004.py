@@ -23,36 +23,60 @@ def read_csc(path):
     return X, Y
 
 
-def cal_p_Yey(Y, y):
-    """cal P(Y=y)"""
-    y_index = np.where(Y == y, 1, 0).nonzero()
-    return len(y_index) / len(Y)
+def cal_m(X_mat):
+    return np.mean(X_mat, axis=0)
 
+def cal_cov(x, y):
+    m_x = np.mean(x)
+    m_y = np.mean(y)
+    return np.sum((x - m_x) * (y - m_y)) / len(x)
 
-def cal_p_Xex(X, x):
-    """cal P(X=x) x is an array"""
-    row = X.shape[0]
-    count = 0
-    for i in range(row):
-        if np.equal(X[i], x).all():
-            count += 1
-    return count / row
+def cal_gaussian_P(x, mu, sq_sigma):
+    a = -(x - mu)**2 / (2*sq_sigma)
+    return np.e**a / (np.sqrt(2*np.pi)*np.sqrt(sq_sigma))
+
+class Bayes:
+    mu_list = []
+    sq_sigma_list = []
+
+    def __init__(self, X, Y):
+        self.X = X
+        self.Y = Y
+        (row, col) = X.shape
+        for i in range(col):
+            x_i = X[:, i]
+            self.mu_list.append(cal_m(x_i))
+            self.sq_sigma_list.append(cal_cov(x_i, x_i))
+
+    def cal_p_Yey(self, y):
+        """cal P(Y=y)"""
+        a = np.sum(self.Y == y) / self.Y.shape[0]
+        return a
+
+    def cal_p_Xex(self, x):
+        """cal P(X=x) x is an array"""
+        P_list = []
+        for i in range(len(x)):
+            P_list.append(cal_gaussian_P(x[i], self.mu_list[i], self.sq_sigma_list[i]))
+        P_list = np.log(P_list)
+        return np.e**np.sum(P_list)
 
 
 def cal_p_Xx_when_Yy(X, x, Y, y):
 
     """cal P(X=x|Y=y) """
     y_index = np.where(Y == y, Y, 0).nonzero()
-    x_model = X[y_index]
-    return cal_p_Xex(x_model, x)
+    n_m = Bayes(X[y_index], Y[y_index])
+    return n_m.cal_p_Xex(x)
 
 
 
 def cal_p_Yy_when_Xx(X, x, Y, y):
     """cal P(Y=y|X=x)"""
     P_Xx_when_Yy = cal_p_Xx_when_Yy(X, x, Y, y)
-    P_Yy = cal_p_Yey(Y, y)
-    P_Xx = cal_p_Xex(X, x)
+    ba = Bayes(X, Y)
+    P_Yy = ba.cal_p_Yey(y)
+    P_Xx = ba.cal_p_Xex(x)
     return P_Xx_when_Yy * P_Yy / P_Xx
 
 
@@ -86,7 +110,8 @@ if __name__ == '__main__':
     w = 1
 
     e = Y_predicted - Y_test
-    err = len(np.array(e).nonzero()) * w / len(Y_test)
+    print(e)
+    err = np.sum(e != 0) * w / len(e)
     print(err)
 
 
