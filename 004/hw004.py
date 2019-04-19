@@ -96,6 +96,15 @@ def predict_threshold(X, x, Y, c, t):
     return t < P
 
 
+def cal_AUC(x , y):
+    sum_AUC = 0
+    for iter_AUC in range(len(x) - 1):
+        a = x[iter_AUC + 1] - x[iter_AUC]
+        b = y[iter_AUC] + y[iter_AUC + 1]
+        sum_AUC += a * b
+    return sum_AUC / 2
+
+
 if __name__ == '__main__':
     X, Y = read_csc("wine.data")
     # 函数本身能保证分层采样
@@ -144,16 +153,13 @@ if __name__ == '__main__':
         p = cal_p_Yy_when_Xx(X_train, x, Y_train, cla)
         threadH.append(p)
 
-
-
-
     Y_test_u = np.where(Y_test == cla, True, False)
     FPRs = []
     TPRs = []
     mi = int(np.min(threadH))
     ma = int(np.max(threadH))
     step = int((ma - mi) / 10)
-    for t in range(mi, ma):
+    for t in range(mi, ma, 1):
         th = t
         Y_predicted = []
         for x in X_test:
@@ -174,12 +180,22 @@ if __name__ == '__main__':
                     CM[1, 0] += 1
                 else:
                     CM[1, 1] += 1
-        TPR = CM[0, 0] / (CM[0, 0] + CM[1, 1])
-        FPR = CM[1, 0] / (CM[0, 1] + CM[1, 0])
+        TPR = CM[0, 0] / (CM[0, 0] + CM[0, 1])
+        FPR = CM[1, 0] / (CM[1, 1] + CM[1, 0])
+
+        # if TPR < 1 and TPR > 0:
+        #    print(th)
         TPRs.append(TPR)
         FPRs.append(FPR)
 
-    print(FPRs)
-    print(TPRs)
+    # print(FPRs)
+    # print(TPRs)
     plt.plot(FPRs, TPRs, '^-')
-    plt.show()
+    plt.title("ROC of class" + str(cla))
+    plt.xlabel("FPR")
+    plt.ylabel("TPR")
+    # plt.show()
+    plt.savefig("ROC of class" + str(cla) + ".png")
+    index_AUC = np.argsort(FPRs)
+
+    print(cal_AUC(np.array(FPRs)[index_AUC], np.array(TPRs)[index_AUC]))
