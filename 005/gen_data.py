@@ -40,7 +40,7 @@ def plot_data(*data):
 
 if __name__ == '__main__':
     centers = [[1, 1, 1], [1, 3, 3], [3, 6, 5], [2, 6, 8]]  # 用于产生聚类的中心点, 聚类中心的维度代表产生样本的维度
-    X, labels_true = create_data(centers, 100, 0.5)  # 产生用于聚类的数据集，聚类中心点的个数代表类别数
+    X, labels_true = create_data(centers, 2000, 0.5)  # 产生用于聚类的数据集，聚类中心点的个数代表类别数
     print(X.shape)
     plot_data(X, labels_true)
     np.save("X", X)

@@ -3,7 +3,7 @@ import numpy as np
 # matplotlib.use("agg")
 import matplotlib.pyplot as plt
 from sklearn.metrics.pairwise import pairwise_distances
-from sklearn import cluster
+
 
 
 class my_cluster:
@@ -90,10 +90,54 @@ def hierarchical_clustering(itemlist, item_dis_mat, dis_func, num):
                     for item in clusterlist[row].point_list:
                         clusterlist[col].point_list.append(item)
                     merged_cluster.append(clusterlist[col])
-        print("len of clusters = ", len(clusterlist))
+        # print("len of clusters = ", len(clusterlist))
         clusterlist = merged_cluster
 
     return clusterlist
+
+def main(func):
+    plt.clf()
+    clusters = hierarchical_clustering(item_list, item_dis_mat, dis_func=func, num=4)
+    for i, c in enumerate(clusters):
+        x_p = []
+        y_p = []
+        for point in c.point_list:
+            x = X[point][0]
+            y = X[point][1]
+            x_p.append(x)
+            y_p.append(y)
+        plt.plot(x_p, y_p, 'o', label="cluster" + str(i))
+    plt.legend(loc="best")
+    figname = "single_linkage_distence_cluster.png"
+    plt.savefig(figname)
+    real_clusters = []
+    for i in set(labels):
+        real_clusters.append([])
+    for i in range(len(labels)):
+        real_clusters[labels[i]].append(i)
+
+    print("in "+str(func))
+    for i in set(labels):
+        real = set(real_clusters[i])
+        recalls = []
+        precistions = []
+        for c in clusters:
+            predict = set(c.point_list)
+            r = len(real & predict) / len(real)
+            p = len(real&predict) / len(predict)
+            recalls.append(r)
+            precistions.append(p)
+        recall = max(recalls)
+        precistion = max(precistions)
+        t1 = recalls.index(recall)
+        t2 = precistions.index(precistion)
+        if t1 != t2:
+            print("err match cluster")
+        print("recall of cluster"+str(i)+"=", recall)
+        print("pricision of cluster"+str(i)+"=", precistion)
+
+
+
 
 
 if __name__ == '__main__':
@@ -103,19 +147,8 @@ if __name__ == '__main__':
     # cal item_dis_mat , different distance func
     item_dis_mat = pairwise_distances(X, metric="euclidean")
     item_list = [x for x in range(X.shape[0])]
-    clusters = hierarchical_clustering(item_list, item_dis_mat, dis_func=single_linkage_distence, num=4)
-    for i, c in enumerate(clusters):
-        x_p = []
-        y_p = []
-        for point in c.point_list:
-            x = X[point][0]
-            y = X[point][1]
-            x_p.append(x)
-            y_p.append(y)
-        plt.plot(x_p, y_p, 'o', label="cluster"+str(i))
-    plt.legend(loc="best")
-    figname = "cluster_data.png"
-    plt.savefig(figname)
-
+    main(single_linkage_distence)
+    main(complete_linkage_distence)
+    main(average_linkage_distence)
 
 
