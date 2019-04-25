@@ -98,18 +98,7 @@ def hierarchical_clustering(itemlist, item_dis_mat, dis_func, num):
 def main(func):
     plt.clf()
     clusters = hierarchical_clustering(item_list, item_dis_mat, dis_func=func, num=4)
-    for i, c in enumerate(clusters):
-        x_p = []
-        y_p = []
-        for point in c.point_list:
-            x = X[point][0]
-            y = X[point][1]
-            x_p.append(x)
-            y_p.append(y)
-        plt.plot(x_p, y_p, 'o', label="cluster" + str(i))
-    plt.legend(loc="best")
-    figname = "single_linkage_distence_cluster.png"
-    plt.savefig(figname)
+
     real_clusters = []
     for i in set(labels):
         real_clusters.append([])
@@ -117,6 +106,7 @@ def main(func):
         real_clusters[labels[i]].append(i)
 
     print("in "+str(func))
+    match = {}
     for i in set(labels):
         real = set(real_clusters[i])
         recalls = []
@@ -127,16 +117,48 @@ def main(func):
             p = len(real&predict) / len(predict)
             recalls.append(r)
             precistions.append(p)
-        recall = max(recalls)
-        precistion = max(precistions)
-        t1 = recalls.index(recall)
-        t2 = precistions.index(precistion)
-        if t1 != t2:
-            print("err match cluster")
+
+        F1 = []
+        for k in range(len(recalls)):
+            r = recalls[k]
+            p = precistions[k]
+            f1 = 0
+            if p + r == 0:
+                f1 = -1
+            else:
+                f1 = 2 * p * r / (p + r)
+            F1.append(f1)
+        f1 = max(F1)
+        t = F1.index(f1)
+        while t in match:
+            F1[t] = -1
+            f1 = max(F1)
+            t = F1.index(f1)
+        match[t] = i
+        recall = recalls[t]
+        precistion = precistions[t]
+
         print("recall of cluster"+str(i)+"=", recall)
         print("pricision of cluster"+str(i)+"=", precistion)
+        print("F1 factor of cluster"+str(i)+"=", max(F1))
 
-
+    colors = 'rgbckm'
+    print(match)
+    for i, c in enumerate(clusters):
+        x_p = []
+        y_p = []
+        for point in c.point_list:
+            x = X[point][0]
+            y = X[point][1]
+            x_p.append(x)
+            y_p.append(y)
+        plt.plot(x_p, y_p, 'o', label="cluster" + str(i), color=colors[match[i]])
+    plt.legend(loc="best")
+    name = str(func).rstrip(">").lstrip("<")
+    a = name.find("at")
+    name = name[:a]
+    figname = str(name)+".png"
+    plt.savefig(figname)
 
 
 

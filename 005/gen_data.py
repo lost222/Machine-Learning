@@ -25,7 +25,7 @@ def plot_data(*data):
     labels = np.unique(labels_true)
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
-    colors = 'rgbyckm'  # 每个簇的样本标记不同的颜色
+    colors = 'rgbckm'  # 每个簇的样本标记不同的颜色
     for i, label in enumerate(labels):
         position = labels_true == label
         ax.scatter(X[position, 0], X[position, 1], label="cluster %d" % label,
