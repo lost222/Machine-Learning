@@ -29,6 +29,9 @@ def cal_cov(x, y):
     m_y = np.mean(y)
     return np.sum((x - m_x) * (y - m_y)) / len(x)
 
+
+
+
 def cal_sigma(X_mat):
     col = np.shape(X_mat)[1]
     sigma = np.zeros((col, col))
