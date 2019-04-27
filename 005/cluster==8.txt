@@ -1,0 +1,43 @@
+nohup: ignoring input
+in <function single_linkage_distence at 0x7fdcf9dd1e18>
+recall of cluster0= 0.494
+pricision of cluster0= 0.96484375
+F1 factor of cluster0= 0.6534391534391535
+recall of cluster1= 0.512
+pricision of cluster1= 1.0
+F1 factor of cluster1= 0.6772486772486772
+recall of cluster2= 0.512
+pricision of cluster2= 1.0
+F1 factor of cluster2= 0.6772486772486772
+recall of cluster3= 0.512
+pricision of cluster3= 1.0
+F1 factor of cluster3= 0.6772486772486772
+{1: 0, 0: 1, 2: 2, 3: 3}
+in <function complete_linkage_distence at 0x7fdceab5f598>
+recall of cluster0= 0.512
+pricision of cluster0= 1.0
+F1 factor of cluster0= 0.6772486772486772
+recall of cluster1= 0.512
+pricision of cluster1= 1.0
+F1 factor of cluster1= 0.6772486772486772
+recall of cluster2= 0.512
+pricision of cluster2= 1.0
+F1 factor of cluster2= 0.6772486772486772
+recall of cluster3= 0.512
+pricision of cluster3= 1.0
+F1 factor of cluster3= 0.6772486772486772
+{1: 0, 2: 1, 0: 2, 3: 3}
+in <function average_linkage_distence at 0x7fdce18261e0>
+recall of cluster0= 0.512
+pricision of cluster0= 1.0
+F1 factor of cluster0= 0.6772486772486772
+recall of cluster1= 0.512
+pricision of cluster1= 1.0
+F1 factor of cluster1= 0.6772486772486772
+recall of cluster2= 0.512
+pricision of cluster2= 1.0
+F1 factor of cluster2= 0.6772486772486772
+recall of cluster3= 0.512
+pricision of cluster3= 1.0
+F1 factor of cluster3= 0.6772486772486772
+{0: 0, 2: 1, 1: 2, 3: 3}

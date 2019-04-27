@@ -97,7 +97,7 @@ def hierarchical_clustering(itemlist, item_dis_mat, dis_func, num):
 
 def main(func):
     plt.clf()
-    clusters = hierarchical_clustering(item_list, item_dis_mat, dis_func=func, num=4)
+    clusters = hierarchical_clustering(item_list, item_dis_mat, dis_func=func, num=8)
 
     real_clusters = []
     for i in set(labels):
@@ -142,7 +142,7 @@ def main(func):
         print("pricision of cluster"+str(i)+"=", precistion)
         print("F1 factor of cluster"+str(i)+"=", max(F1))
 
-    colors = 'rgbckm'
+    # colors = 'rgbckm'
     print(match)
     for i, c in enumerate(clusters):
         x_p = []
@@ -152,11 +152,11 @@ def main(func):
             y = X[point][1]
             x_p.append(x)
             y_p.append(y)
-        plt.plot(x_p, y_p, 'o', label="cluster" + str(i), color=colors[match[i]])
+        plt.plot(x_p, y_p, 'o', label="cluster" + str(i))
     plt.legend(loc="best")
     name = str(func).rstrip(">").lstrip("<")
     a = name.find("at")
-    name = name[:a]
+    name = name[:a] + str(8)
     figname = str(name)+".png"
     plt.savefig(figname)
 
