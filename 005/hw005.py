@@ -45,9 +45,6 @@ def hierarchical_clustering(itemlist, item_dis_mat, dis_func, num):
         n_clu = my_cluster(item_dis_mat)
         n_clu.point_list.append(item)
         clusterlist.append(n_clu)
-    # 类的成员函数， 共享
-    # clusterlist[0].distence_matrix = item_dis_mat
-
 
 
     while len(clusterlist) > num:
