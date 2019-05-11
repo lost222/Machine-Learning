@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e711871e-365d-4c58-bf4d-25be76721b07" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/ML 005 聚类.md" beforeDir="false" afterPath="$PROJECT_DIR$/ML 005 聚类.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hw005.py" beforeDir="false" afterPath="$PROJECT_DIR$/hw005.py" afterDir="false" />
-    </list>
+    <list default="true" id="e711871e-365d-4c58-bf4d-25be76721b07" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,12 +180,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1556110667316</updated>
-      <workItem from="1556360921871" duration="929000" />
+      <workItem from="1556360921871" duration="1044000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="929000" />
+    <option name="totallyTimeSpent" value="1044000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="23" width="2495" height="1417" extended-state="0" />
