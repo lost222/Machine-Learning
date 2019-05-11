@@ -3,6 +3,7 @@ import numpy as np
 # matplotlib.use("agg")
 import matplotlib.pyplot as plt
 from sklearn.metrics.pairwise import pairwise_distances
+import time
 
 
 
@@ -94,7 +95,10 @@ def hierarchical_clustering(itemlist, item_dis_mat, dis_func, num):
 
 def main(func):
     plt.clf()
-    clusters = hierarchical_clustering(item_list, item_dis_mat, dis_func=func, num=8)
+
+    start = time.clock()
+    clusters = hierarchical_clustering(item_list, item_dis_mat, dis_func=func, num=4)
+    elapsed = (time.clock() - start)
 
     real_clusters = []
     for i in set(labels):
@@ -103,6 +107,7 @@ def main(func):
         real_clusters[labels[i]].append(i)
 
     print("in "+str(func))
+    print("rum time is"+str(elapsed))
     match = {}
     for i in set(labels):
         real = set(real_clusters[i])
@@ -155,7 +160,7 @@ def main(func):
     a = name.find("at")
     name = name[:a] + str(8)
     figname = str(name)+".png"
-    plt.savefig(figname)
+    # plt.savefig(figname)
 
 
 
@@ -166,8 +171,8 @@ if __name__ == '__main__':
     # cal item_dis_mat , different distance func
     item_dis_mat = pairwise_distances(X, metric="euclidean")
     item_list = [x for x in range(X.shape[0])]
-    main(single_linkage_distence)
     main(complete_linkage_distence)
+    main(single_linkage_distence)
     main(average_linkage_distence)
 
 
