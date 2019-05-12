@@ -26,7 +26,7 @@ def load_txt(path):
         line = f.readline()
         while line:
             d = line.rstrip("\n").split(',')
-            print(d)
+            # print(d)
             re = []
             # 输入编号方便追踪
             re.append(int(d[0]))
@@ -67,26 +67,39 @@ def gain(X, Y, attr):
 
 
 class Node:
-    def __init__(self, attr, label):
+    def __init__(self, attr, label, v):
         # label == nan是非叶节点
         # attr == nan 是叶节点
         self.attr = attr
         self.label = label
+        self.attr_v = v
         self.children = []
 
-def dicision_tree(X, Y, attrs, root, purity_cal):
+
+def is_same_on_attr(X, attrs):
+    X_a = X[:, attrs]
+    target = X_a[0]
+    for r in range(X_a.shape[0]):
+        row = X_a[r]
+        if (row != target).any():
+            return False
+    return True
+
+
+def dicision_tree_init(X, Y, attrs, root, purity_cal):
     # 递归基
     if len(set(Y)) == 1:
-        root.attr = np.nan
+        root.attr = np.pi
         root.label = Y[0]
-        return
+        return None
 
     # @todo:
     # 什么是D中样本在A上取值相同
-    if len(attrs) == 0 or len(set(Y[attrs])) == 1:
-        root.attr = np.nan
+    if len(attrs) == 0 or is_same_on_attr(X, attrs):
+        root.attr = np.pi
         # Y 中出现次数最多的label设定为node的label
         root.label = np.argmax(np.bincount(Y))
+        return None
 
     # 计算每个attr的划分收益
     purity_attrs = []
@@ -96,11 +109,13 @@ def dicision_tree(X, Y, attrs, root, purity_cal):
 
     chosen_index = purity_attrs.index(max(purity_attrs))
     chosen_attr = attrs[chosen_index]
+    root.attr = chosen_attr
+    root.label = np.pi
     print("chose", chosen_attr)
     del attrs[chosen_index]
     x_attr_col = X[:, chosen_attr]
     for x_v in set(X[:, chosen_attr]):
-        n = Node(-1, -1)
+        n = Node(-1, -1, x_v)
         root.children.append(n)
         # 不可能Dv empty 要是empty压根不会在set里
         # 选出 X[attr] == x_v的行
@@ -108,13 +123,30 @@ def dicision_tree(X, Y, attrs, root, purity_cal):
         index_x_equal_v = np.where(x_attr_col == x_v)
         X_x_equal_v = X[index_x_equal_v]
         Y_x_equal_v = Y[index_x_equal_v]
-
-        dicision_tree(X_x_equal_v, Y_x_equal_v, attrs, n, purity_cal)
-
+        dicision_tree_init(X_x_equal_v, Y_x_equal_v, attrs, n, purity_cal)
 
     # @todo:
     # 假如某个选项在训练集上已经被另一个选项删除了P(AB) = 0 而且A选择在所有训练集数据上都更先发生， 那么现在的实现是没有B的分支的。
 
+
+def dicision_tree_predict(x, tree_root):
+    if tree_root.label != np.pi:
+        return tree_root.label
+
+    # 决策
+    if tree_root.label == np.pi and tree_root.attr == np.pi:
+        print("err!")
+        return None
+
+    chose_attr = tree_root.attr
+    # 寻找自己应该进入哪个分支
+    for child in tree_root.children:
+        if child.attr_v == x[chose_attr]:
+            return dicision_tree_predict(x, child)
+
+    # 因为构造的时候有点问题： 见todo， 有可能执行到这里， 这个时候应该报错
+    print("err : need to fix bug in init")
+    return None
 
 
 
@@ -131,10 +163,15 @@ if __name__ == '__main__':
     X_test = test_data[:, 1:-1]
     Y_test = test_data[:, -1]
 
-    # dot_data = tree.export_graphviz(clf, out_file=None)
-    # graph = graphviz.Source(dot_data)
-    # graph.render("iris")
-
-    r = Node(-1, -1)
+    r = Node(-1, -1, -1)
     attrs = [0, 1, 2, 3]
-    dicision_tree(X_train, Y_train, attrs, r, gain)
+    dicision_tree_init(X_train, Y_train, attrs, r, gain)
+
+    y_predict = []
+    for i in range(X_test.shape[0]):
+        x = X_test[i]
+        y_p = dicision_tree_predict(x, r)
+        y_predict.append(y_p)
+
+    acc = accuracy_score(Y_test, y_predict)
+    print(acc)
