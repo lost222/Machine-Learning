@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="911be81d-657c-4ace-b358-db7e608a9aab" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hw006.py" beforeDir="false" afterPath="$PROJECT_DIR$/hw006.py" afterDir="false" />
-    </list>
+    <list default="true" id="911be81d-657c-4ace-b358-db7e608a9aab" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +27,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hw006.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3348">
+            <state relative-caret-position="-550">
               <caret line="186" column="99" selection-start-line="186" selection-start-column="99" selection-end-line="186" selection-end-column="99" />
             </state>
           </provider>
@@ -224,12 +221,12 @@
       <option name="presentableId" value="Default" />
       <updated>1557577923568</updated>
       <workItem from="1557580204976" duration="16280000" />
-      <workItem from="1557664296749" duration="6242000" />
+      <workItem from="1557664296749" duration="6329000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22522000" />
+    <option name="totallyTimeSpent" value="22609000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -357,7 +354,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hw006.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3348">
+        <state relative-caret-position="-550">
           <caret line="186" column="99" selection-start-line="186" selection-start-column="99" selection-end-line="186" selection-end-column="99" />
         </state>
       </provider>
