@@ -64,6 +64,41 @@ def Gini(D):
     return 1 - np.sum(s * s)
 
 
+def gain_continue(X, Y, attr, t):
+    # get attr when attr is continue and t divide X
+    x_attr_col = X[:, attr]
+    ent_Dv = []
+    weight_Dv = []
+
+    index_x_less_t = np.where(x_attr_col < t)
+    y_x_less_t = Y[index_x_less_t]
+    ent_Dv.append(ent(y_x_less_t))
+    weight_Dv.append(np.shape(y_x_less_t)[0] / np.shape(Y)[0])
+
+    index_x_ge_t = np.where(x_attr_col >= t)
+    y_x_ge_t = Y[index_x_ge_t]
+    ent_Dv.append(ent(y_x_ge_t))
+    weight_Dv.append(np.shape(y_x_ge_t)[0] / np.shape(Y)[0])
+    return ent(Y) - np.sum(np.array(ent_Dv) * np.array(weight_Dv))
+
+def gain_cal_t(X, Y, attr):
+    x_attr_col = X[:, attr]
+    G = []
+    T = []
+    for i in range(len(x_attr_col) - 1):
+        t = (x_attr_col[i] + x_attr_col[i+1]) / 2
+        ga = gain_continue(X, Y, attr, t)
+        T.append(t)
+        G.append(ga)
+    best_t_index = np.argmax(G)
+    return T[best_t_index], G[best_t_index]
+
+
+
+
+
+
+
 def gain(X, Y, attr, is_conti):
     # X, Y 是numpy arrary attr是某个特征的index
     x_attr_col = X[:, attr]
@@ -76,20 +111,12 @@ def gain(X, Y, attr, is_conti):
             y_x_equal_v = Y[index_x_equal_v]
             ent_Dv.append(ent(y_x_equal_v))
             weight_Dv.append(np.shape(y_x_equal_v)[0] / np.shape(Y)[0])
+        return ent(Y) - np.sum(np.array(ent_Dv) * np.array(weight_Dv))
     # 连续值处理
     else:
-        half = (np.max(x_attr_col) + np.min(x_attr_col)) / 2
-        index_x_less_half = np.where(x_attr_col < half)
-        y_x_less_half = Y[index_x_less_half]
-        ent_Dv.append(ent(y_x_less_half))
-        weight_Dv.append(np.shape(y_x_less_half)[0] / np.shape(Y)[0])
+        return gain_cal_t(X, Y, attr)[1]
 
-        index_x_ge_half = np.where(x_attr_col >= half)
-        y_x_ge_half = Y[index_x_ge_half]
-        ent_Dv.append(ent(y_x_ge_half))
-        weight_Dv.append(np.shape(y_x_ge_half)[0] / np.shape(Y)[0])
 
-    return ent(Y) - np.sum(np.array(ent_Dv) * np.array(weight_Dv))
 
 
 
@@ -174,7 +201,7 @@ def dicision_tree_init(X, Y, attrs, is_con_array, root, purity_cal):
             Y_x_equal_v = Y[index_x_equal_v]
             dicision_tree_init(X_x_equal_v, Y_x_equal_v, attrs, is_con_array, n, purity_cal)
     else:
-        half = (np.max(x_attr_col) + np.min(x_attr_col)) / 2
+        half = gain_cal_t(X, Y, chosen_attr)[0]
         n_l = Node(-1, -1, -np.inf)
         n_ge = Node(-1, -1, half)
         root.children.append(n_l)
