@@ -1,6 +1,6 @@
-import matplotlib
-
-matplotlib.use('TkAgg')
+# import matplotlib
+#
+# matplotlib.use('TkAgg')
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import tree
@@ -26,7 +26,7 @@ def load_txt(path):
         line = f.readline()
         line = f.readline()
         while line:
-            d = line.rstrip("\n").split(',')
+            d = line.rstrip("\r\n").split(',')
             print(d)
             re = []
             # 输入编号方便追踪
@@ -308,7 +308,7 @@ def dicision_tree_init_pre_pru(X, Y, X_test, Y_test, attrs, is_con_array, root, 
     # 不展开
     if acc_yes < acc_no :
         print("do not expand")
-        root.label = np.argmax(np.bincount(Y))
+        root.label = cal_label(Y)
         root.attr = np.pi
         root.children.clear()
 
@@ -404,10 +404,10 @@ if __name__ == '__main__':
     Y_test = test_data[:, -1]
 
     r = Node(-1, -1, -1)
-    attrs = [0, 1, 2, 3, 4]
-    is_contine = [False, False, False, False, True]
+    attrs = [0, 1, 2, 3]
+    is_contine = [False, False, False, False]
 
-    test_index = [1, 3, 5, 7]
+    test_index = [1, 3, 13, 15]
 
     x_tra, x_te, y_tra, y_te = my_splite(X_train, Y_train, test_index)
     # dicision_tree_init(X_train, Y_train, attrs, is_contine, r, gain)
