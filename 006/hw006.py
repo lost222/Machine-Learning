@@ -7,7 +7,8 @@ from sklearn import tree
 import pandas as pd
 import codecs
 from sklearn.metrics import accuracy_score
-import graphviz
+from sklearn.model_selection import train_test_split
+
 
 feature_dict = {"色泽": ["青绿", "乌黑", "浅白"],
                 "根蒂": ["蜷缩", "稍蜷", "硬挺"],
@@ -213,13 +214,147 @@ def dicision_tree_init(X, Y, attrs, is_con_array, root, purity_cal):
         index_x_ge_half = np.where(x_attr_col >= half)
         dicision_tree_init(X[index_x_ge_half], Y[index_x_ge_half], attrs, is_con_array, n_ge, purity_cal)
 
+def cal_label(Y):
+    count1 = np.sum(Y)
+    count0 = Y.shape[0] - count1
+    if count0 < count1:
+        return 1
+    else:
+        return 0
 
 
+def dicision_tree_init_pre_pru(X, Y, X_test, Y_test, attrs, is_con_array, root, real_root , purity_cal):
+    # 递归基
+    Y.astype(np.int64)
+    if len(set(Y)) == 1:
+        root.attr = np.pi
+        root.label = Y[0]
+        return None
 
 
+    if len(attrs) == 0 or is_same_on_attr(X, attrs):
+        root.attr = np.pi
+        # Y 中出现次数最多的label设定为node的label
+        root.label = np.argmax(np.bincount(Y))
+        return None
 
-    # @todo:
-    # 假如某个选项在训练集上已经被另一个选项删除了P(AB) = 0 而且A选择在所有训练集数据上都更先发生， 那么现在的实现是没有B的分支的。
+    # 计算每个attr的划分收益
+    purity_attrs = []
+    for i, a in enumerate(attrs):
+        is_con = is_con_array[i]
+        p = purity_cal(X, Y, a, is_con)
+        purity_attrs.append(p)
+
+    chosen_index = purity_attrs.index(max(purity_attrs))
+    chosen_attr = attrs[chosen_index]
+    is_attr_conti = is_con_array[chosen_index]
+    print("chose", chosen_attr)
+
+
+    # 计算不展开的验证集精确度
+    root.label = cal_label(Y)
+    root.attr = np.pi
+    y_predict = []
+    for i in range(X_test.shape[0]):
+        x = X_test[i]
+        y_p = dicision_tree_predict(x, real_root, [False, False, False, False, True])
+        y_predict.append(y_p)
+
+    acc_no = accuracy_score(Y_test, y_predict)
+
+    # 计算展开的验证集收益
+    root.attr = chosen_attr
+    root.label = np.pi
+    x_attr_col = X[:, chosen_attr]
+
+    if not is_attr_conti:
+        for x_v in set(X[:, chosen_attr]):
+            n = Node(-1, -1, x_v)
+            # 不可能Dv empty 要是empty压根不会在set里
+            # 选出 X[attr] == x_v的行
+            index_x_equal_v = np.where(x_attr_col == x_v)
+            X_x_equal_v = X[index_x_equal_v]
+            Y_x_equal_v = Y[index_x_equal_v]
+            n.attr = np.pi
+            n.label = cal_label(Y_x_equal_v)
+            root.children.append(n)
+    else:
+        half = gain_cal_t(X, Y, chosen_attr)[0]
+        n_l = Node(-1, -1, -np.inf)
+        n_ge = Node(-1, -1, half)
+
+
+        index_x_less_half = np.where(x_attr_col < half)
+        n_l.attr = np.pi
+        n_l.label = cal_label(Y[index_x_less_half])
+
+        index_x_ge_half = np.where(x_attr_col >= half)
+        n_ge.attr = np.pi
+        n_ge.label = cal_label(Y[index_x_ge_half])
+
+        root.children.append(n_l)
+        root.children.append(n_ge)
+
+    y_predict_yes = []
+    for i in range(X_test.shape[0]):
+        x = X_test[i]
+        y_p = dicision_tree_predict(x, real_root, [False, False, False, False, True])
+        y_predict_yes.append(y_p)
+
+    acc_yes = accuracy_score(Y_test, y_predict_yes)
+
+    print("acc of expand=", acc_yes)
+    print("acc of not expand=", acc_no)
+    # 不展开
+    if acc_yes < acc_no :
+        print("do not expand")
+        root.label = np.argmax(np.bincount(Y))
+        root.attr = np.pi
+        root.children.clear()
+
+    # 展开
+    else:
+
+        root.attr = chosen_attr
+        root.label = np.pi
+        print("expand")
+
+        del attrs[chosen_index]
+        del is_con_array[chosen_index]
+
+
+        # 离散数据处理
+        if not is_attr_conti:
+            for n in root.children:
+                x_v = n.attr_v
+                # 不可能Dv empty 要是empty压根不会在set里
+                # 选出 X[attr] == x_v的行
+                index_x_equal_v = np.where(x_attr_col == x_v)
+                X_x_equal_v = X[index_x_equal_v]
+                Y_x_equal_v = Y[index_x_equal_v]
+                dicision_tree_init_pre_pru(X_x_equal_v, Y_x_equal_v, X_test, Y_test, attrs, is_con_array, n, real_root, purity_cal)
+        else:
+            half = gain_cal_t(X, Y, chosen_attr)[0]
+            n_l = root.children[0]
+            n_ge = root.children[1]
+
+            index_x_less_half = np.where(x_attr_col < half)
+            dicision_tree_init_pre_pru(X[index_x_less_half], Y[index_x_less_half], X_test, Y_test, attrs, is_con_array, n_l, real_root, purity_cal)
+
+            index_x_ge_half = np.where(x_attr_col >= half)
+            dicision_tree_init_pre_pru(X[index_x_ge_half], Y[index_x_ge_half], X_test, Y_test, attrs, is_con_array, n_ge , real_root, purity_cal)
+
+
+def my_splite(X, Y, test_index_a):
+    index_test = np.array(test_index_a) - 1
+    index_all = range(X.shape[0])
+    index_train = np.array(list(set(index_all) - set(index_test)))
+
+    x_train = X[index_train]
+    y_train = Y[index_train]
+    x_test = X[index_test]
+    y_test = Y[index_test]
+    return x_train, x_test, y_train, y_test
 
 
 def dicision_tree_predict(x, tree_root, is_con_arry):
@@ -251,9 +386,6 @@ def dicision_tree_predict(x, tree_root, is_con_arry):
         return dicision_tree_predict(x, child, is_con_arry)
 
 
-
-
-
     # 因为构造的时候有点问题： 见todo， 有可能执行到这里， 这个时候应该报错
     print("err : need to fix bug in init")
     return None
@@ -263,6 +395,7 @@ if __name__ == '__main__':
     ans = load_txt("第六次实验要求/Watermelon-train2.csv")
     X_train = ans[:, 1: -1]
     Y_train = ans[:, -1]
+    Y_train.astype(np.int64)
     clf = tree.DecisionTreeClassifier()
     clf = clf.fit(X_train, Y_train)
 
@@ -273,7 +406,12 @@ if __name__ == '__main__':
     r = Node(-1, -1, -1)
     attrs = [0, 1, 2, 3, 4]
     is_contine = [False, False, False, False, True]
-    dicision_tree_init(X_train, Y_train, attrs, is_contine, r, gain)
+
+    test_index = [1, 3, 5, 7]
+
+    x_tra, x_te, y_tra, y_te = my_splite(X_train, Y_train, test_index)
+    # dicision_tree_init(X_train, Y_train, attrs, is_contine, r, gain)
+    dicision_tree_init_pre_pru(x_tra, y_tra, x_te, y_te, attrs, is_contine, r, r, gain)
 
     y_predict = []
     for i in range(X_test.shape[0]):

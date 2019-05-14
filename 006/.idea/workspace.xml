@@ -30,26 +30,27 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hw006.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="83" selection-start-line="83" selection-end-line="93" selection-end-column="43" />
+            <state relative-caret-position="270">
+              <caret line="158" selection-start-line="158" selection-end-line="214" selection-end-column="105" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+        <entry file="file://$PROJECT_DIR$/第六次实验要求/Watermelon-train2.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            <state>
+              <caret column="14" selection-start-column="12" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_bundle/pydev_umd.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3438">
-              <caret line="196" selection-start-line="196" selection-end-line="196" />
+        <entry file="file://$PROJECT_DIR$/006 决策树.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor />
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -79,10 +80,14 @@
       <find>np.nan</find>
       <find>print</find>
       <find>half</find>
+      <find>X</find>
+      <find>Y</find>
     </findStrings>
     <replaceStrings>
       <replace>np.pi</replace>
       <replace>t</replace>
+      <replace>X_train</replace>
+      <replace>Y_train</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -95,7 +100,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="65" />
     <option name="y" value="23" />
     <option name="width" value="2495" />
@@ -106,7 +111,29 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="006" type="b2602c69:ProjectViewProjectNode" />
+              <item name="006" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="006" type="b2602c69:ProjectViewProjectNode" />
+              <item name="006" type="462c0819:PsiDirectoryNode" />
+              <item name="第六次实验要求" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="006" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -194,11 +221,12 @@
       <workItem from="1557580204976" duration="16280000" />
       <workItem from="1557664296749" duration="6329000" />
       <workItem from="1557758483384" duration="2118000" />
+      <workItem from="1557797665490" duration="7503000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24727000" />
+    <option name="totallyTimeSpent" value="32230000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -210,10 +238,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="23" width="2495" height="1417" extended-state="0" />
+    <frame x="65" y="23" width="2495" height="1417" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.5" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.49979618" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -233,16 +261,42 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Remote Host" order="3" weight="0.32928804" />
-      <window_info anchor="right" id="SciView" order="4" sideWeight="0.49326804" visible="true" weight="0.26742765" />
+      <window_info anchor="right" id="SciView" order="4" sideWeight="0.49082008" visible="true" weight="0.26742765" />
       <window_info anchor="right" id="Database" order="5" weight="0.32928804" />
-      <window_info anchor="right" x="0" y="0" width="574" height="1217" id="Documentation" order="6" sideWeight="0.5067319" side_tool="true" visible="true" weight="0.26742765" />
+      <window_info anchor="right" x="0" y="0" width="574" height="1217" id="Documentation" order="6" sideWeight="0.50917995" side_tool="true" visible="true" weight="0.26742765" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/hw006.py</url>
+          <line>413</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/hw006.py</url>
+          <line>319</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/hw006.py</url>
+          <line>262</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/hw006.py</url>
+          <line>389</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/006$hw006.coverage" NAME="hw006 Coverage Results" MODIFIED="1557670939960" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/006$hw006.coverage" NAME="hw006 Coverage Results" MODIFIED="1557804042736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../003/hw003.py">
@@ -255,29 +309,7 @@
     <entry file="file://$PROJECT_DIR$/第六次实验要求/Watermelon-test2.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/第六次实验要求/Watermelon-train2.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="14" selection-start-column="12" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/ML/lib/python3.7/codecs.py" />
     <entry file="file://$USER_HOME$/anaconda3/envs/ML/lib/python3.7/site-packages/sklearn/tree/tree.py" />
-    <entry file="file://$PROJECT_DIR$/hw006.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="83" selection-start-line="83" selection-end-line="93" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_bundle/pydev_umd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3438">
@@ -296,6 +328,49 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/006 决策树.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/envs/ML/lib/python3.7/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="311" selection-start-line="311" selection-end-line="311" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/envs/ML/lib/python3.7/site-packages/numpy/core/_dtype.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="57" selection-start-line="57" selection-end-line="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第六次实验要求/Watermelon-train2.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="14" selection-start-column="12" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hw006.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="158" selection-start-line="158" selection-end-line="214" selection-end-column="105" />
         </state>
       </provider>
     </entry>
