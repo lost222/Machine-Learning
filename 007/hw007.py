@@ -8,7 +8,6 @@ from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import average_precision_score
 
 
-
 def fsml(X_train, Y_train, alpha):
     """X is attrs * samples
     Y is samples * lables
@@ -68,6 +67,7 @@ def fsml(X_train, Y_train, alpha):
 
     return W, bt, objective
 
+
 def pick_attrs(W, frac):
     select = []
     for i in range(W.shape[0]):
@@ -78,59 +78,75 @@ def pick_attrs(W, frac):
     to_select_attr = np.argsort(select)[:select_num]
     return to_select_attr
 
-def precision_recall_mul_lable(Y_pre, Y_true):
-    precision_vec = np.zeros(Y_true.shape[1])
-    recall_vec = np.zeros(Y_true.shape[1])
-    p_vec = np.zeros(Y_true.shape[1])
-    for i in range(Y_true.shape[1]):
-        precision, recall, _ = precision_recall_curve(Y_true[:, i], Y_pre[:, i])
-        precision_vec[i] = precision
-        recall_vec[i] = recall
-        p_vec[i] = np.sum(Y_true[:, i]) / Y_true.shape[0]
-    return np.sum(precision_vec*p_vec), np.sum(recall_vec*p_vec)
+
+def precision_recall_mul_lable(Y_true, Y_pre):
+    TP = 0
+    FN = 0
+    FP = 0
+    TN = 0
+    for i in range(Y_true.shape[0]):
+        for j in range(Y_true.shape[1]):
+            if Y_true[i][j] == 1 and Y_pre[i][j] == 1:
+                TP += 1
+            elif Y_true[i][j] == 1 and Y_pre[i][j] == 0:
+                FN += 1
+            elif Y_true[i][j] == 0 and Y_pre[i][j] == 1:
+                FP += 1
+            else:
+                TN += 1
+
+    if TP + FP == 0:
+        precision = 0
+    else:
+        precision = TP / (TP + FP)
+    if TP + FN == 0:
+        recall = 0
+    else:
+        recall = TP / (TP + FN)
+    return precision, recall
 
 
+# if __name__ == '__main__':
+mat_contents = sio.loadmat('07/emotions.mat')
+# X for samples * attrs
+X = mat_contents['data']
+# X = np.transpose(X)
+# Y for labels * samples
+Y = mat_contents['target']
+Y = np.transpose(Y)
+# Y_ba = Y.copy()
 
+# 划分训练集和测试集
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
 
-if __name__ == '__main__':
-    mat_contents = sio.loadmat('07/emotions.mat')
-    # X for samples * attrs
-    X = mat_contents['data']
-    # X = np.transpose(X)
-    # Y for labels * samples
-    Y = mat_contents['target']
-    Y = np.transpose(Y)
-    # Y_ba = Y.copy()
+# 在训练集中划分训练集和测试集
 
-    # 划分训练集和测试集
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+X_1, X_2, Y_1, Y_2 = train_test_split(X_train, Y_train, test_size=0.2)
 
-    # 在训练集中划分训练集和测试集
+# 训练合适的 alpha
 
-    X_1, X_2, Y_1, Y_2 = train_test_split(X_train, Y_train, test_size=0.2)
+alpha_vec = [10e-6, 10e-4, 10e-2, 10e0, 10e2, 10e4, 10e6]
 
-    # 训练合适的 alpha
-    alpha = 0.01
+alpha = 10
+W, bt, obj = fsml(np.transpose(X_1), Y_1, alpha)
+precision_vec = []
 
-
-    W, bt , obj = fsml(np.transpose(X_1), Y_1, alpha)
-
-    pick_array = pick_attrs(W, 1/6)
-
+for i_ in range(1, 6):
+    pick_array = pick_attrs(W, i_ / 6)
     X_train_picked = X_train[:, pick_array]
-
     clf = OneVsRestClassifier(SVC(kernel='linear'))
-
     clf.fit(X_train_picked, Y_train)
-
     Y_predict = clf.predict(X_test[:, pick_array])
+    precision, recall = precision_recall_mul_lable(Y_test, Y_predict)
+    precision_vec.append(precision)
 
-    precision_vec = np.zeros(Y_test.shape[1])
-    recall_vec = np.zeros(Y_test.shape[1])
-    p_vec = np.zeros(Y_test.shape[1])
-    for i in range(Y_test.shape[1]):
-        precision, recall, _ = precision_recall_curve(Y_test[:, i], Y_predict[:, i])
-        precision_vec[i] = precision
-        recall_vec[i] = recall
-        p_vec[i] = np.sum(Y_test[:, i]) / Y_test.shape[0]
+map_x = list(range(1, 6))
+map_x = np.array(map_x) / 6 * X.shape[0]
+
+plt.clf()
+plt.plot(map_x, precision_vec, '-o')
+plt.xlabel("choose attrs")
+plt.ylabel("MAP")
+figname = "alpha= " + str(alpha) + " MAP.png"
+plt.show()
 
