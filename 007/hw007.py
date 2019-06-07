@@ -6,6 +6,7 @@ from sklearn.svm import SVC
 from sklearn.multiclass import OneVsOneClassifier, OneVsRestClassifier
 from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import average_precision_score
+from sklearn.metrics import hamming_loss
 
 
 def fsml(X_train, Y_train, alpha):
@@ -38,22 +39,24 @@ def fsml(X_train, Y_train, alpha):
         bt = 1 / n * (np.ones((1, n)).dot(Y_train) - np.ones((1, n)).dot(np.transpose(X_train)).dot(W))
         Ypred = np.transpose(X_train).dot(W) + np.ones((n, 1)).dot(bt)
 
-        # 手动保证有lable的在前没lable的在后
+        # # 手动保证有lable的在前没lable的在后
         for i in range(labeled_num, n):
             for j in range(0, label_num):
                 if Ypred[i, j] <= 0:
                     Y_train[i, j] = 0
+                elif Ypred[i, j] >= 1:
+                    Y_train[i, j] = 1
                 else:
-                    if Ypred[i, j] >= 1:
-                        Y_train[i, j] = 1
-                    else:
-                        Y_train[i, j] = Ypred[i, j]
+                    Y_train[i, j] = Ypred[i, j]
+
+        # print(Ypred[-1])
+        # print(Y_train[-1])
 
         # (norm((X_train'*W + ones(n,1)*bt - Y_train), 'fro'))^2 + alpha * sum(sqrt(sum(W.*W,2)+eps));
         to_norm = np.transpose(X_train).dot(W) + np.ones((n, 1)).dot(bt) - Y_train
         temp = np.linalg.norm(to_norm, 'fro') ** 2 + alpha * np.sum(np.sqrt(np.sum(W * W, 1) + np.finfo(float).eps))
 
-        # cver = abs((objective(iter) - obji)/obji);
+        # cver = abs((objective(iter) - obji)/obji)
         cver = np.abs((temp - obji) / obji)
         # obji = objective(iter);
         obji = temp
@@ -63,9 +66,10 @@ def fsml(X_train, Y_train, alpha):
 
         # if (cver < 10^-3 && iter > 2) , break, end
         if cver < 0.001 and iter > 2:
+            Y_train = np.uint8(Y_train + 0.5)
             break
 
-    return W, bt, objective
+    return W, bt, objective, Y_train
 
 
 def pick_attrs(W, frac):
@@ -106,6 +110,25 @@ def precision_recall_mul_lable(Y_true, Y_pre):
     return precision, recall
 
 
+def label_take(X, Y, rate):
+    # 随机打乱 X 和 Y
+    random_arry = np.random.choice(Y.shape[0], Y.shape[0], replace=False)
+    X = X[random_arry]
+    Y = Y[random_arry]
+
+    # Y 的后部 rate 没标签
+    no_label_num = int(Y.shape[0] * rate)
+
+    pick_no_label = np.ones((Y.shape[0], 1))
+
+    pick_no_label[Y.shape[0] - no_label_num:Y.shape[0], :] = np.zeros((no_label_num, 1))
+
+    Y_s = np.uint8(Y * pick_no_label)
+
+    return X, Y_s, Y
+
+
+
 # if __name__ == '__main__':
 mat_contents = sio.loadmat('07/emotions.mat')
 # X for samples * attrs
@@ -119,34 +142,58 @@ Y = np.transpose(Y)
 # 划分训练集和测试集
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
 
+# 拿走一半sample
+rate = 0.1
+X_train, Y_train_s, Y_train = label_take(X_train, Y_train, 1 - rate)
+
+Y_train_s = np.asarray(Y_train_s, np.float)
+
 # 在训练集中划分训练集和测试集
 
-X_1, X_2, Y_1, Y_2 = train_test_split(X_train, Y_train, test_size=0.2)
+# X_1, X_2, Y_1, Y_2 = train_test_split(X_train, Y_train, test_size=0.2)
 
 # 训练合适的 alpha
 
 alpha_vec = [10e-6, 10e-4, 10e-2, 10e0, 10e2, 10e4, 10e6]
 
-alpha = 10
-W, bt, obj = fsml(np.transpose(X_1), Y_1, alpha)
+min_vec = []
+
+alpha = 0.1
+# X_1, Y_1 = label_take(X_1, Y_1, 0.5)
+
+# 使用预测出来的Y_train
+W, bt, obj, Y_train_s = fsml(np.transpose(X_train), Y_train_s, alpha)
 precision_vec = []
+ham_vec = []
 
 for i_ in range(1, 6):
     pick_array = pick_attrs(W, i_ / 6)
     X_train_picked = X_train[:, pick_array]
     clf = OneVsRestClassifier(SVC(kernel='linear'))
+
+    # 送进SVM
     clf.fit(X_train_picked, Y_train)
     Y_predict = clf.predict(X_test[:, pick_array])
-    precision, recall = precision_recall_mul_lable(Y_test, Y_predict)
-    precision_vec.append(precision)
+    # precision, recall = precision_recall_mul_lable(Y_test, Y_predict)
+    ham = hamming_loss(Y_test, Y_predict)
+    # precision_vec.append(precision)
+    ham_vec.append(ham)
+
+
+min_h = min(ham_vec)
+min_vec.append(min_h)
 
 map_x = list(range(1, 6))
 map_x = np.array(map_x) / 6 * X.shape[0]
 
 plt.clf()
-plt.plot(map_x, precision_vec, '-o')
+# plt.plot(map_x, precision_vec, '-o')
+plt.plot(map_x, ham_vec, '-d')
 plt.xlabel("choose attrs")
-plt.ylabel("MAP")
-figname = "alpha= " + str(alpha) + " MAP.png"
+plt.ylabel("hamming_loss")
+plt.title("label "+str(rate*100)+"% alpha = " + str(alpha))
+figname = "label "+str(rate*100)+"% alpha = " + str(alpha) + " hamming_loss.png"
+# plt.savefig(figname)
+print(min_h)
 plt.show()
 
