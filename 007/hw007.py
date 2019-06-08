@@ -128,6 +128,11 @@ def label_take(X, Y, rate):
     return X, Y_s, Y
 
 
+def fs_predict(W, bt, x):
+    ans = x.dot(W) + bt
+    ans = np.uint8(ans + 0.5)
+    return ans
+
 
 # if __name__ == '__main__':
 mat_contents = sio.loadmat('07/emotions.mat')
@@ -140,7 +145,7 @@ Y = np.transpose(Y)
 # Y_ba = Y.copy()
 
 # 划分训练集和测试集
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
 # 拿走一半sample
 rate = 0.1
@@ -166,34 +171,40 @@ W, bt, obj, Y_train_s = fsml(np.transpose(X_train), Y_train_s, alpha)
 precision_vec = []
 ham_vec = []
 
-for i_ in range(1, 6):
-    pick_array = pick_attrs(W, i_ / 6)
-    X_train_picked = X_train[:, pick_array]
-    clf = OneVsRestClassifier(SVC(kernel='linear'))
 
-    # 送进SVM
-    clf.fit(X_train_picked, Y_train)
-    Y_predict = clf.predict(X_test[:, pick_array])
-    # precision, recall = precision_recall_mul_lable(Y_test, Y_predict)
-    ham = hamming_loss(Y_test, Y_predict)
-    # precision_vec.append(precision)
-    ham_vec.append(ham)
+Y_predict = fs_predict(W, bt, X_test)
+ham = hamming_loss(Y_test, Y_predict)
+print(ham)
 
 
-min_h = min(ham_vec)
-min_vec.append(min_h)
-
-map_x = list(range(1, 6))
-map_x = np.array(map_x) / 6 * X.shape[0]
-
-plt.clf()
-# plt.plot(map_x, precision_vec, '-o')
-plt.plot(map_x, ham_vec, '-d')
-plt.xlabel("choose attrs")
-plt.ylabel("hamming_loss")
-plt.title("label "+str(rate*100)+"% alpha = " + str(alpha))
-figname = "label "+str(rate*100)+"% alpha = " + str(alpha) + " hamming_loss.png"
-# plt.savefig(figname)
-print(min_h)
-plt.show()
+# for i_ in range(1, 6):
+#     pick_array = pick_attrs(W, i_ / 6)
+#     X_train_picked = X_train[:, pick_array]
+#     clf = OneVsRestClassifier(SVC(kernel='linear'))
+#
+#     # # 送进SVM
+#     # clf.fit(X_train_picked, Y_train)
+#     # Y_predict = clf.predict(X_test[:, pick_array])
+#     # # precision, recall = precision_recall_mul_lable(Y_test, Y_predict)
+#     # ham = hamming_loss(Y_test, Y_predict)
+#     # # precision_vec.append(precision)
+#     # ham_vec.append(ham)
+#
+#
+# min_h = min(ham_vec)
+# min_vec.append(min_h)
+#
+# map_x = list(range(1, 6))
+# map_x = np.array(map_x) / 6 * X.shape[0]
+#
+# plt.clf()
+# # plt.plot(map_x, precision_vec, '-o')
+# plt.plot(map_x, ham_vec, '-d')
+# plt.xlabel("choose attrs")
+# plt.ylabel("hamming_loss")
+# plt.title("label "+str(rate*100)+"% alpha = " + str(alpha))
+# figname = "label "+str(rate*100)+"% alpha = " + str(alpha) + " hamming_loss.png"
+# # plt.savefig(figname)
+# print(min_h)
+# plt.show()
 
