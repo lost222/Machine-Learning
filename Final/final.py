@@ -40,8 +40,10 @@ for loo in loss_vec:
             pre1 = average_precision_score(Y_test, Y_predict, average='samples')
             pre2 = precision_score(Y_test, Y_predict, average='samples')
             # precision_vec.append(precision)
-            states_str = "loss : " + loo + "\npenalty : " + pe
+            alpha_str = ", alpha = " + str(alpha)
+            states_str = "loss : " + loo + ", penalty : " + pe + alpha_str
             log_str = "average_precision_score = " + str(pre1) + "\nprecision_score = " + str(pre2)
+            # print(alpha_str)
             print(states_str)
             print(log_str)
             print("")
